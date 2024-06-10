@@ -1,0 +1,76 @@
+<%- layout("/layouts/boilerplate") %>
+
+    <body>
+
+        <div class="row mt-3">
+            <div class="col-8 offset-2">
+
+                <h2>Edit your listing</h2>
+                <form action="/listings/<%= listing._id %>/?_method=PUT" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" autofocus name="listing[title]" required value="<%= listing.title %>" class="form-control">
+                        <div class="valid-feedback">Title looks good!</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" required name="listing[description]"><%= listing.description %></textarea>
+                        <div class="invalid-feedback">Please enter a short description</div>
+                    </div>
+
+                    <div class="mb-3">
+                        Original image <br>
+                        <img src="<%= originalUrl %>" alt="image" style="height: 250px; width: 250px;">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Upload New Image</label>
+                        <input type="file" name="listing[image]"  class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" required name="listing[price]" value="<%= listing.price %>"
+                                class="form-control">
+                            <div class="invalid-feedback">Price should be valid</div>
+                        </div>
+                        <div class="mb-3 col-md-8">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" required name="listing[country]" value="<%= listing.country %>"
+                                class="form-control">
+                            <div class="invalid-feedback">Country name should be valid</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" required name="listing[location]" value="<%= listing.location %>"
+                            class="form-control">
+                        <div class="invalid-feedback">Location should be valid</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="listing[category]" id="category" multiple class="form-select" aria-label="Multiple select example">
+                            <option value="Trending">Trending</option>
+                            <option value="Rooms">Rooms</option>
+                            <option value="Boats">Boats</option>
+                            <option value="Domes">Domes</option>
+                            <option value="Iconic cities">Iconic cities</option>
+                            <option value="Mountains">Mountains</option>
+                            <option value="Castles">Castles</option>
+                            <option value="Arctic">Arctic</option>
+                            <option value="Camping">Camping</option>
+                            <option value="Amazing pools">Amazing pools</option>
+                            <option value="Farms">Farms</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-dark edit-btn mt-3">Edit</button>
+                </form>
+
+            </div>
+        </div>
+        <br>
+    </body>
