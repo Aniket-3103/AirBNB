@@ -66,7 +66,22 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
-    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+
+    //for checking if location was changed and to generate new coordinates
+    let oldListing=await Listing.findById(id);         
+
+    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
+
+    //if location was changed, change the coordinates.
+    if(listing.location!==oldListing.location){
+        let response=await geocodingClient.forwardGeocode({
+            query: req.body.listing.location,
+            limit: 1
+        }).send();
+    
+        listing.geometry=response.body.features[0].geometry;
+        await listing.save();
+    }
 
     //if an image is provided, only then update the filename and url.
     if (typeof req.file !== "undefined") {
