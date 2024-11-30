@@ -177,3 +177,13 @@ body{
     border-radius: 25px;
     padding: 0.5rem 3rem 0.5rem 3rem;
   }
+
+  .bg-gradient {
+    background: linear-gradient(to right, #007bff, #6610f2);
+    color: #ffffff;
+  }
+
+  span{
+    color: #fe424d;;
+  }
+  

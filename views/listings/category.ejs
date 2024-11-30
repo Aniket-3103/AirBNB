@@ -1,6 +1,17 @@
 <%- layout("/layouts/boilerplate") %>
 
     <body>
+
+        <% if (currUser) { %>
+            <div class="container mt-4">
+              <div class="p-4 bg-gradient rounded shadow-lg text-center">
+                <h2 class="fw-bold text-dark">
+                  Welcome, <span><%= currUser.username %></span>!
+                </h2>
+              </div>
+            </div>
+        <% } %>
+
         <div id="filters">
             <div class="filter">
                 <div><i class="fa-solid fa-fire"></i></div>
